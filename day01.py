@@ -32,8 +32,8 @@ def part1(testing=True):
 def part2(testing=True):
     data = get_lines(1, testing, True)
 
-    position = 50
-    zero_count = 0
+    current_pos = 50
+    num_zeros = 0
     for line in data:
         direction = line[0]
         clicks = int(line[1:])
@@ -41,13 +41,13 @@ def part2(testing=True):
         # Move 1 click instead
         for _ in range(clicks):
             if direction == 'L':
-                position = (position - 1) % 100
+                current_pos = (current_pos - 1) % 100
             else: # direction R
-                position = (position + 1) % 100
+                current_pos = (current_pos + 1) % 100
 
-            if position == 0:
-                zero_count += 1
-    return zero_count
+            if current_pos == 0:
+                num_zeros += 1
+    return num_zeros
 
 
 # print(part1(False))
