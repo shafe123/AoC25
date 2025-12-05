@@ -8,8 +8,8 @@ def read_file(
                 line = line.strip()
             if line and split_str:
                 line = [char for char in line]
-            if line:
-                result.append(line)
+
+            result.append(line)
 
     return result
 
