@@ -32,7 +32,37 @@ def part1(testing=True):
     return values
 
 
+@separator()
+def part2(testing=True):
+    data: list[str] = get_lines(6, testing, strip=False)  # type: ignore
+    num_cols = len(data[0])
+    num_rows = len(data)
+
+    values = []
+    numbers = []
+    operator = sum  # just make the linter happy
+
+    # column-wise ordering
+    for col in range(num_cols):
+        # print(col)
+        if data[-1][col] in ["+", "*"]:  # start of a new set of numbers
+            numbers = []
+            operator = sum if data[-1][col] == "+" else prod
+
+        this_number = []
+        for row in range(num_rows - 1):
+            this_number.append(data[row][col].strip())
+        # are we in a blank columna and do we have numbers?
+        if all([num == "" for num in this_number]) and numbers:
+            # compute the value for the given math
+            # print(numbers)
+            values.append(operator(numbers))
+        else:
+            numbers.append(int("".join(this_number)))
+    return values
+
+
 if __name__ == "__main__":
-    result = part1(False)
+    result = part2(False)
     print(result)
     print(sum(result))
