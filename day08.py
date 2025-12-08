@@ -1,7 +1,7 @@
 from utilities import *
 from math import sqrt
 
-MAX_LENGTH = 1000
+MAX_LENGTH = 10
 
 
 class Point:
@@ -125,6 +125,6 @@ def generate_distance_map(points):
 
 
 if __name__ == "__main__":
-    result = part1(False)
+    result = part1()
     [print(circuit) for circuit in result[:3]]
     print(prod([len(circuit) + 1 for circuit in result[:3]]))
