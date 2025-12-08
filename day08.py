@@ -70,7 +70,7 @@ def generate_sorted_distances(points, distance_map):
         for col in range(row + 1, len(distance_map)):
             distances.append((distance_map[row][col], points[row], points[col]))
     distances.sort()
-    [print(elem) for elem in distances]
+    # [print(elem) for elem in distances]
     return distances
 
 
@@ -78,6 +78,7 @@ def generate_sorted_distances(points, distance_map):
 def generate_circuits(distances):
     circuits = []
     for distance, point_one, point_two in distances[:MAX_LENGTH]:
+        circuit = None
         # see if it's in a circuit or not
         for index, circuit_list in enumerate(circuits):
             # do nothing here
@@ -99,7 +100,8 @@ def generate_circuits(distances):
             circuits.append([])
             circuit = -1
 
-        circuits[circuit].append((point_one, point_two))
+        if circuit:
+            circuits[circuit].append((point_one, point_two))
         # print(circuits)
 
     [print(circuit) for circuit in circuits]
@@ -116,9 +118,9 @@ def generate_distance_map(points):
             if point_one is point_two:
                 continue
 
-            distance_map[row][col] = round(point_one - point_two, 0)
+            distance_map[row][col] = point_one - point_two
 
-    print_grid(distance_map, 8)
+    # print_grid(distance_map, 8)
     return distance_map
 
 
