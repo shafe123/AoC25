@@ -25,10 +25,13 @@ def get_lines(
     return read_file(file, strip, split_str)
 
 
-def print_grid(grid: list[list]):
+def print_grid(grid: list[list], width=None):
     for row in grid:
         for val in row:
-            print(val, end="")
+            if not width:
+                print(val, end="")
+            else:
+                print(f"{str(val).rjust(width)}", end="")
         print()
 
 
