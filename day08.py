@@ -1,6 +1,8 @@
 from utilities import *
 from math import sqrt
 
+MAX_LENGTH = 1000
+
 
 class Point:
     def __init__(self, coords: tuple[int, int, int]) -> None:
@@ -55,8 +57,9 @@ def part1(testing=True):
     distance_map = generate_distance_map(points)
     distances = generate_sorted_distances(points, distance_map)
     circuits = generate_circuits(distances)
+    circuits.sort(key=len, reverse=True)
 
-    return None
+    return circuits
 
 
 @separator()
@@ -74,7 +77,7 @@ def generate_sorted_distances(points, distance_map):
 @separator()
 def generate_circuits(distances):
     circuits = []
-    for distance, point_one, point_two in distances:
+    for distance, point_one, point_two in distances[:MAX_LENGTH]:
         # see if it's in a circuit or not
         for index, circuit_list in enumerate(circuits):
             # do nothing here
@@ -120,5 +123,6 @@ def generate_distance_map(points):
 
 
 if __name__ == "__main__":
-    result = part1()
-    print(result)
+    result = part1(False)
+    [print(circuit) for circuit in result[:3]]
+    print(prod([len(circuit) + 1 for circuit in result[:3]]))

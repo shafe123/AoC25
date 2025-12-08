@@ -1,3 +1,7 @@
+from functools import reduce  # Required in Python 3
+import operator
+
+
 def read_file(
     input_file: str, strip: bool = True, split_str: bool = False
 ) -> list[str] | list[list[str]]:
@@ -59,3 +63,7 @@ def separator(name=None):
         return inner
 
     return breaker
+
+
+def prod(iterable):
+    return reduce(operator.mul, iterable, 1)
